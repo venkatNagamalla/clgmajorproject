@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.active{
+  border-bottom:2px solid blue;
+}
+
+body{
+  color:#fff
+}
+
+.nav-click{
+  background-color: blue;
+}

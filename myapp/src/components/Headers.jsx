@@ -7,13 +7,14 @@ const Headers = () => {
   const [menu, setMenu] = useState(false);
   const handleMenu = () => setMenu(!menu);
 
-
   const renderLaptopView = () => {
     return (
-      <section className="bg-[#30364f8e] hidden border rounded-lg border-[#ffffff5b] h-12 mt-4 md:flex justify-between items-center px-4">
-        <h1>M</h1>
-        <nav className="w-[40%]">
-          <ul className="flex w-[full] justify-between">
+      <section className="hidden md:flex bg-[#30364f8e] border border-[#ffffff5b] rounded-lg h-14 mt-4 items-center justify-between px-6">
+       {/* update the movies application name */}
+        <h1 className="text-xl font-bold">M</h1>
+
+        <nav className="w-[50%] lg:w-[40%]">
+          <ul className="flex justify-between text-sm lg:text-base">
             <li>
               <NavLink to="/">Popular</NavLink>
             </li>
@@ -32,64 +33,70 @@ const Headers = () => {
     );
   };
 
-  const renderMoblieView = () => {
+  const renderMobileView = () => {
     return (
-      <section className="md:hidden border mt-4 rounded-lg border-[#ffffff5b] h-10 flex justify-between items-center px-5  bg-[#30364f8e]">
-          <h1>M</h1>
-          {menu ? (
-            <button onClick={handleMenu}>
-              <RxCross2 />
-            </button>
-          ) : (
-            <button onClick={handleMenu}>
-              <IoMenu />
-            </button>
-          )}
+      <section className="md:hidden mt-4 border border-[#ffffff5b] rounded-lg h-12 flex items-center justify-between px-4 bg-[#30364f8e]">
+       {/* update the movies application name */}
+        <h1 className="text-lg font-bold">M</h1>
+
+        <button onClick={handleMenu} className="text-2xl">
+          {menu ? <RxCross2 /> : <IoMenu />}
+        </button>
+
         <nav
-          className={`bg-[#30364f8e] border border-[#ffffff5b] fixed flex flex-col top-15 bottom-0 transition-all duration-300 
-           ${menu ? "left-[60%]" : "left-full"} w-[60%]`}
+          className={`fixed top-16 bottom-0 bg-[#30364f] border-l border-[#ffffff5b] w-[70%] sm:w-[60%] transition-all duration-300 flex flex-col ${
+            menu ? "right-0" : "right-[-100%]"
+          }`}
         >
-          <ul>
-  <NavLink
-    to="/"
-    onClick={handleMenu}
-    className={({ isActive }) =>
-      isActive ? "text-blue-700 font-semibold" : ""
-    }
-  >
-    <li className="px-5 flex items-center h-10 mb-3">Popular</li>
-  </NavLink>
+          <ul className="mt-5">
+            <NavLink
+              to="/"
+              onClick={handleMenu}
+              className={({ isActive }) =>
+                isActive ? "text-blue-500 font-semibold" : ""
+              }
+            >
+              <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f]">
+                Popular
+              </li>
+            </NavLink>
 
-  <NavLink
-    to="/top-rated"
-    onClick={handleMenu}
-    className={({ isActive }) =>
-      isActive ? "text-blue-700 font-semibold" : ""
-    }
-  >
-    <li className="px-5 flex items-center h-10 mb-3">Top Rated</li>
-  </NavLink>
+            <NavLink
+              to="/top-rated"
+              onClick={handleMenu}
+              className={({ isActive }) =>
+                isActive ? "text-blue-500 font-semibold" : ""
+              }
+            >
+              <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f]">
+                Top Rated
+              </li>
+            </NavLink>
 
-  <NavLink
-    to="/upcoming-movies"
-    onClick={handleMenu}
-    className={({ isActive }) =>
-      isActive ? "text-blue-700 font-semibold" : ""
-    }
-  >
-    <li className="px-5 flex items-center h-10 mb-3">Upcoming Movies</li>
-  </NavLink>
+            <NavLink
+              to="/upcoming-movies"
+              onClick={handleMenu}
+              className={({ isActive }) =>
+                isActive ? "text-blue-500 font-semibold" : ""
+              }
+            >
+              <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f]">
+                Upcoming Movies
+              </li>
+            </NavLink>
 
-  <NavLink
-    to="/search"
-    onClick={handleMenu}
-    className={({ isActive }) =>
-      isActive ? "text-blue-700 font-semibold" : ""
-    }
-  >
-    <li className="px-5 flex items-center h-10 mb-3">Search</li>
-  </NavLink>
-</ul>
+            <NavLink
+              to="/search"
+              onClick={handleMenu}
+              className={({ isActive }) =>
+                isActive ? "text-blue-500 font-semibold" : ""
+              }
+            >
+              <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f]">
+                Search
+              </li>
+            </NavLink>
+          </ul>
         </nav>
       </section>
     );
@@ -98,7 +105,7 @@ const Headers = () => {
   return (
     <>
       {renderLaptopView()}
-      {renderMoblieView()}
+      {renderMobileView()}
     </>
   );
 };

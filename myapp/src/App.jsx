@@ -8,9 +8,9 @@ import NotFound from './components/NotFound';
 
 const App = () => {
   return (
-    <main className='flex justify-center h-screen bg-[#0e1113f5]'>
+    <main className='flex justify-center bg-[#0e1113f5]'>
     
-      <section className='w-[95%] md:w-[90%]'>
+      <section className='w-[95%] min-h-[100vh] md:w-[90%]'>
          <Headers/>
       
       <Routes>

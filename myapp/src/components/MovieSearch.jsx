@@ -16,6 +16,7 @@ const MovieSearch = () => {
   const [totalPages, setTotalPages] = useState();
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [popularMoviesList, setPopularMoviesList] = useState([]);
+  const [search, setSearch] = useState("")
 
   const format = (obj) => ({
     id: obj.id,
@@ -24,13 +25,29 @@ const MovieSearch = () => {
     poster: obj.poster_path,
   });
 
+   const getSearchMovieDetails = async (movieName) => {
+    setApiStatus(apiStatusConstants.inProgress);
+    const apiUrl = `https://api.themoviedb.org/3/search/movie?api\_key=${apiKey}&language=en-US&query=${movieName}&page=${page}`;
+    const response = await fetch(apiUrl);
+    if (response.ok) {
+      const data = await response.json();
+      const totalPagesCount = data.total_pages;
+      const updatedData = data.results.map((eachMovie) => format(eachMovie));
+      setApiStatus(apiStatusConstants.success);
+      setTotalPages(totalPagesCount);
+      setPopularMoviesList(updatedData);
+    } else {
+      setApiStatus(apiStatusConstants.failure);
+    }
+  };
+
   const getMovieDetails = async () => {
     setApiStatus(apiStatusConstants.inProgress);
 
     const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`;
 
     const response = await fetch(apiUrl);
-
+ 
     if (response.ok) {
       const data = await response.json();
       const updatedData = data.results.map((eachMovie) => format(eachMovie));
@@ -44,7 +61,11 @@ const MovieSearch = () => {
   };
 
   useEffect(() => {
-  getMovieDetails();
+  if (search === "") {
+      getMovieDetails();
+    } else {
+      getSearchMovieDetails(search);
+    }
 
   window.scrollTo({
     top: 0,
@@ -145,13 +166,42 @@ const MovieSearch = () => {
     </div>
   );
 
+  const searchMovie = (e) => {
+    if(search !== "" && e.key === "Enter"){
+          getSearchMovieDetails(search)
+    }
+    else if(search === ""){
+      getMovieDetails()
+    }
+  }
+
+  const renderSearchBar = () => {
+    return (
+      <div className="h-9 md:ml-9 md:w-[500px] mt-10 mb-10">
+        <input onKeyDown={searchMovie} onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search movie name here..." className="border border-yellow-400 outline-none px-2 h-[100%] w-[80%]" type="search"/>
+        <button onClick={() => {
+          search === ""
+            ? getMovieDetails()
+            : getSearchMovieDetails(search);
+        }} className="w-[20%] h-[100%] cursor-pointer font-semibold bg-yellow-400 text-black" type="button">Search</button>
+      </div>
+    )
+  }
+
   return (
     <div className="max-w-[1400px] mt-20 mx-auto">
+      {renderSearchBar()}
       {renderViews()}
 
       <hr className="border-gray-700 my-5" />
-
-      {apiStatus === "SUCCESS" ? renderPage(): ""}
+      
+      {popularMoviesList.length !== 0 && (
+        <>
+          <hr />
+          {apiStatus === "SUCCESS" ? renderPage(): ""}
+        </>
+      ) }
+      
     </div>
   );
 };

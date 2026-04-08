@@ -34,7 +34,7 @@ items-center justify-between px-6"
             </li>
 
             <li>
-              <NavLink to="/search">Search</NavLink>
+              <NavLink className="flex items-center" to="/search">Search</NavLink>
             </li>
           </ul>
         </nav>

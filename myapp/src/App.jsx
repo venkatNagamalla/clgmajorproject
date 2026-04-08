@@ -5,6 +5,7 @@ import TopRated from './components/TopRated';
 import UpcomingMovies from './components/UpcomingMovies';
 import MovieSearch from './components/MovieSearch';
 import NotFound from './components/NotFound';
+import MovieDetails from './components/MovieDetails';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
          <Route exact path="/top-rated" element={<TopRated/>} />
          <Route exact path="/upcoming-movies" element={<UpcomingMovies/>} />
          <Route exact path="/search" element={<MovieSearch/>} />
+         <Route exact path="/movie/:id" element={<MovieDetails/>}/>
          <Route path="*" element={<NotFound/>}/>
       </Routes>
       </section>

@@ -1,11 +1,13 @@
-import React from "react";
+
+import {Link} from "react-router-dom"
 
 const MovieCard = (props) => {
   const { movieDetails } = props;
-  const { poster, title, rating } = movieDetails;
+  const { id,poster, title, rating } = movieDetails;
 
   return (
-    <li className="w-[48%] cursor-pointer lg:w-[200px] h-[300px] border border-white overflow-hidden shadow-md mb-3 hover:scale-102 transition duration-200">
+    <Link to={`/movie/${id}`}>
+       <li className="w-[48%] cursor-pointer lg:w-[200px] h-[300px] border border-white overflow-hidden shadow-md mb-3 hover:scale-102 transition duration-200">
       <div className="bg-[#1f1f1f] h-full">
         
         <img
@@ -27,6 +29,7 @@ const MovieCard = (props) => {
 
       </div>
     </li>
+    </Link>
   );
 };
 

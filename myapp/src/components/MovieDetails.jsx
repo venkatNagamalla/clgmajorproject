@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import LoaderView from "./LoaderView";
+import MovieBannerSection from "./MovieBannerSection";
 
 const apiKey = "e2ab8a4105df7b69787b3a32979db5f9";
 
@@ -45,7 +46,6 @@ const MovieDetails = () => {
     const response = await fetch(apiUrl);
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       const updatedData = formatData(data);
       setMovieDetails(updatedData);
       setMovieApiStatus(apiStatusConstants.success);
@@ -85,14 +85,11 @@ const MovieDetails = () => {
   );
 
   const renderMovieFailureView = () => (
-    <div className="container">
-      <FailureView />
+    <div className="flex flex-col items-center justify-center h-[50vh] gap-4">
+      <h1 className="text-xl md:text-2xl font-semibold">Something Went Wrong</h1>
       <button
-        className="retry-btn"
-        onClick={() => {
-          getBannerDetails();
-        }}
-        type="button"
+        onClick={getBannerDetails}
+        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
       >
         Retry
       </button>
@@ -115,9 +112,8 @@ const MovieDetails = () => {
   );
 
     const renderMovieDetails = () => (
-    <div className="movie-banner-section">
-         {/* <MovieBannerSection movieDetails={movieDetails} /> */}
-         <h1>Success</h1>
+    <div className="">
+         <MovieBannerSection movieDetails={movieDetails} />
     </div>
   );
 

@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-
 import { useParams } from "react-router-dom";
 import LoaderView from "./LoaderView";
 import MovieBannerSection from "./MovieBannerSection";
@@ -117,7 +116,7 @@ const MovieDetails = () => {
     </div>
   );
 
-   const renderTopSection = () => {
+   const renderMovieDetailsSection = () => {
     switch (movieApiStatus) {
       case apiStatusConstants.inProgress:
         return renderLoaderView();
@@ -137,7 +136,7 @@ const MovieDetails = () => {
      </>
   )
 
-    const renderBottomSection = () => {
+    const renderCastDetailsSection = () => {
     switch (castApiStatus) {
       case apiStatusConstants.inProgress:
         return renderLoaderView();
@@ -152,8 +151,8 @@ const MovieDetails = () => {
 
      return (
     <div className="sections-container mt-20">
-      {renderTopSection()}
-      {renderBottomSection()}
+      {renderMovieDetailsSection()}
+      {renderCastDetailsSection()}
     </div>
   );
 

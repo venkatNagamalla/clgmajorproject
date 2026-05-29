@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { RiMovie2Line } from "react-icons/ri";
+
 import MovieCard from "./MovieCard";
 import LoaderView from "./LoaderView";
 
@@ -15,7 +17,7 @@ const UpcomingMovies = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
-  const [popularMoviesList, setPopularMoviesList] = useState([]);
+  const [upcomingMoviesList, setUpcomingMoviesList] = useState([]);
 
   const format = (obj) => ({
     id: obj.id,
@@ -35,7 +37,7 @@ const UpcomingMovies = () => {
       const data = await response.json();
       const updatedData = data.results.map((eachMovie) => format(eachMovie));
 
-      setPopularMoviesList(updatedData);
+      setUpcomingMoviesList(updatedData);
       setTotalPages(data.total_pages);
       setApiStatus(apiStatusConstants.success);
     } else {
@@ -74,7 +76,7 @@ const UpcomingMovies = () => {
       justify-center
     "
     >
-      {popularMoviesList.map((eachMovie) => (
+      {upcomingMoviesList.map((eachMovie) => (
         <MovieCard key={eachMovie.id} movieDetails={eachMovie} />
       ))}
     </ul>
@@ -147,6 +149,8 @@ const UpcomingMovies = () => {
 
   return (
     <div className="max-w-[1400px] mt-20 mx-auto">
+      <h2 className="mb-3 lg:mb-5 text-lg font-semibold lg:ml-13 bg-amber-300 text-black flex items-center justify-center w-65">Upcoming Movies<RiMovie2Line className="ml-2" /></h2>
+
       {renderViews()}
 
       <hr className="border-gray-700 my-5" />

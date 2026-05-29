@@ -15,7 +15,7 @@ const MovieSearch = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
-  const [popularMoviesList, setPopularMoviesList] = useState([]);
+  const [moviesList, setMoviesList] = useState([]);
   const [search, setSearch] = useState("")
 
   const format = (obj) => ({
@@ -35,7 +35,7 @@ const MovieSearch = () => {
       const updatedData = data.results.map((eachMovie) => format(eachMovie));
       setApiStatus(apiStatusConstants.success);
       setTotalPages(totalPagesCount);
-      setPopularMoviesList(updatedData);
+      setMoviesList(updatedData);
     } else {
       setApiStatus(apiStatusConstants.failure);
     }
@@ -52,7 +52,7 @@ const MovieSearch = () => {
       const data = await response.json();
       const updatedData = data.results.map((eachMovie) => format(eachMovie));
 
-      setPopularMoviesList(updatedData);
+      setMoviesList(updatedData);
       setTotalPages(data.total_pages);
       setApiStatus(apiStatusConstants.success);
     } else {
@@ -95,7 +95,7 @@ const MovieSearch = () => {
       justify-center
     "
     >
-      {popularMoviesList.map((eachMovie) => (
+      {moviesList.map((eachMovie) => (
         <MovieCard key={eachMovie.id} movieDetails={eachMovie} />
       ))}
     </ul>
@@ -177,7 +177,7 @@ const MovieSearch = () => {
 
   const renderSearchBar = () => {
     return (
-      <div className="h-9 md:ml-9 md:w-[500px] mt-10 mb-10">
+      <div className="h-9 md:ml-9 md:w-125 mt-10 mb-10">
         <input onKeyDown={searchMovie} onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search movie name here..." className="border border-yellow-400 outline-none px-2 h-[100%] w-[80%]" type="search"/>
         <button onClick={() => {
           search === ""
@@ -195,7 +195,7 @@ const MovieSearch = () => {
 
       <hr className="border-gray-700 my-5" />
       
-      {popularMoviesList.length !== 0 && (
+      {moviesList.length !== 0 && (
         <>
           <hr />
           {apiStatus === "SUCCESS" ? renderPage(): ""}

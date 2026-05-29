@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import LoaderView from "./LoaderView";
+import { MdLocalMovies } from "react-icons/md";
 
 const apiKey = "e2ab8a4105df7b69787b3a32979db5f9";
 
@@ -55,7 +56,7 @@ const PopularMoviePage = () => {
 
   const renderFailureView = () => (
     <div className="flex flex-col items-center justify-center h-[50vh] gap-4">
-      <h1 className="text-xl md:text-2xl font-semibold">Something Went Wrong</h1>
+      <h1 className="text-xl md:text-2xl font-semibold">Something Went Wrong!</h1>
       <button
         onClick={getMovieDetails}
         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
@@ -146,7 +147,8 @@ const PopularMoviePage = () => {
   );
 
   return (
-    <div className="max-w-[1400px] mt-20 mx-auto">
+    <div className="max-w-350 mt-20 mx-auto">
+      <h2 className="mb-3 lg:mb-5 text-lg font-semibold lg:ml-13 bg-amber-300 text-black justify-center w-65 flex items-center">Popular Movies <MdLocalMovies className="ml-1" /></h2>
       {renderViews()}
 
       <hr className="border-gray-700 my-5" />

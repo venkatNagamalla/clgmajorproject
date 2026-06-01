@@ -6,11 +6,11 @@
 }
 
 .active{
-  border-bottom:2px solid blue;
+  border-bottom:2px solid rgb(238, 255, 0);
 }
 
 body{
-  color:#fff
+  color:#fff;
 }
 
 .nav-click{

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
-import { SiThemoviedatabase } from "react-icons/si";
+import { IoIosSearch } from "react-icons/io";
 
 const Headers = () => {
   const [menu, setMenu] = useState(false);
@@ -17,9 +17,15 @@ const Headers = () => {
              rounded-lg h-14 
             items-center justify-between px-6"
       >
-         <h1 className="text-4xl font-bold text-white">
-            <Link to="/" ><SiThemoviedatabase/></Link>
-          </h1>
+        <h1 className="text-4xl font-bold text-white">
+          <Link to="/">
+            <img
+              src="/logo.svg"
+              alt="Movie Review System"
+              className="h-10 w-auto"
+            />
+          </Link>
+        </h1>
 
         <nav className="w-[60%] lg:w-[40%]">
           <ul className="flex justify-between text-sm lg:text-base">
@@ -37,7 +43,7 @@ const Headers = () => {
 
             <li>
               <NavLink className="flex items-center" to="/search">
-                Search
+                Search <IoIosSearch className="ml-1" />
               </NavLink>
             </li>
           </ul>
@@ -56,7 +62,13 @@ const Headers = () => {
         justify-between px-4 bg-[#30364f8e] backdrop-blur-md"
         >
           <h1 className="text-3xl font-bold text-white">
-            <Link to="/" ><SiThemoviedatabase/></Link>
+            <Link to="/">
+              <img
+                src="/logo.svg"
+                alt="Movie Review System"
+                className="h-10 w-auto"
+              />
+            </Link>
           </h1>
 
           <button onClick={handleMenu} className="text-2xl text-white">
@@ -83,12 +95,12 @@ const Headers = () => {
         flex flex-col
         ${menu ? "right-0" : "right-[-100%]"}`}
         >
-          <ul className="mt-5 text-white">
+          <ul className="mt-5 text-white"> 
             <NavLink
               to="/"
               onClick={handleMenu}
               className={({ isActive }) =>
-                isActive ? "text-blue-400 font-semibold" : ""
+                isActive ? "text-yellow-300 font-semibold" : ""
               }
             >
               <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f] hover:bg-[#2b3048]">
@@ -100,7 +112,7 @@ const Headers = () => {
               to="/top-rated"
               onClick={handleMenu}
               className={({ isActive }) =>
-                isActive ? "text-blue-400 font-semibold" : ""
+                isActive ? "text-yellow-300 font-semibold" : ""
               }
             >
               <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f] hover:bg-[#2b3048]">
@@ -112,7 +124,7 @@ const Headers = () => {
               to="/upcoming-movies"
               onClick={handleMenu}
               className={({ isActive }) =>
-                isActive ? "text-blue-400 font-semibold" : ""
+                isActive ? "text-yellow-300 font-semibold" : ""
               }
             >
               <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f] hover:bg-[#2b3048]">
@@ -124,7 +136,7 @@ const Headers = () => {
               to="/search"
               onClick={handleMenu}
               className={({ isActive }) =>
-                isActive ? "text-blue-400 font-semibold" : ""
+                isActive ? "text-yellow-300 font-semibold" : ""
               }
             >
               <li className="px-6 h-12 flex items-center border-b border-[#ffffff1f] hover:bg-[#2b3048]">

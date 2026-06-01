@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LoaderView from "./LoaderView";
+import CastCard from "./CastCard";
 import MovieBannerSection from "./MovieBannerSection";
 
 const apiKey = "e2ab8a4105df7b69787b3a32979db5f9";
@@ -30,7 +31,7 @@ const MovieDetails = () => {
     id: obj.id,
     title: obj.original_title,
     rating: obj.vote_average,
-    releaseData: obj.release_date,
+    releaseDate: obj.release_date,
     runtime: obj.runtime,
     overview: obj.overview,
     banner: obj.backdrop_path,
@@ -72,9 +73,14 @@ const MovieDetails = () => {
     }
   };
 
+
    useEffect(() => {
     getBannerDetails();
     getCastDetails();
+    window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   }, []);
 
     const renderLoaderView = () => (
@@ -130,10 +136,25 @@ const MovieDetails = () => {
   };
 
    const renderCastDetails = () => (
-     <>
-       <h1 className="cast-text">Cast</h1>
-       {/* <ul className="cast-container">{castDetails.map((eachCast) => <CastCard key={eachCast.id} castDetails={eachCast}/>)}</ul> */}
-     </>
+     <div className="bg-black py-4 mt-5 px-3">
+    <h2 className="text-white text-xl text-base font-semibold mb-3 tracking-wide">
+      Cast
+      <span className="ml-2 text-xs text-gray-500 font-normal">({castDetails.length})</span>
+    </h2>
+
+    <div className="relative">
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10
+                      bg-gradient-to-l to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10
+                      bg-gradient-to-r to-transparent" />
+
+      <ul className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+        {castDetails.map((eachCast) => (
+          <CastCard key={eachCast.id} castDetails={eachCast} />
+        ))}
+      </ul>
+    </div>
+  </div>
   )
 
     const renderCastDetailsSection = () => {
@@ -150,7 +171,7 @@ const MovieDetails = () => {
   };
 
      return (
-    <div className="sections-container mt-20">
+    <div className="min-h-[110vh] mt-20">
       {renderMovieDetailsSection()}
       {renderCastDetailsSection()}
     </div>

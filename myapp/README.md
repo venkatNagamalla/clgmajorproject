@@ -102,5 +102,5 @@ myapp/
 
 ## Developers
 
-**Venkat Nagamalla**
+**Venkat Nagamalla**,
 **Dasari Sriya**

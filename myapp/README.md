@@ -8,7 +8,7 @@ A web app to browse movies, search for your favorite films, and view movie detai
 
 ## GitHub Repo
 
-[https://github.com/venkatNagamalla/clgmajorproject](https://github.com/venkatNagamalla/movie-review-system)
+[https://github.com/venkatNagamalla/movie-review-system](https://github.com/venkatNagamalla/movie-review-system)
 
 ---
 
@@ -37,13 +37,13 @@ A web app to browse movies, search for your favorite films, and view movie detai
 ### Step 1 - Clone the repo
 
 ```bash
-git clone https://github.com/venkatNagamalla/clgmajorproject.git
+git clone https://github.com/venkatNagamalla/movie-review-system.git
 ```
 
 ### Step 2 - Go into the project folder
 
 ```bash
-cd clgmajorproject/myapp
+cd movie-review-system
 ```
 
 ### Step 3 - Install dependencies

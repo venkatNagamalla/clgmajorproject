@@ -8,7 +8,7 @@ A web app to browse movies, search for your favorite films, and view movie detai
 
 ## GitHub Repo
 
-[https://github.com/venkatNagamalla/clgmajorproject](https://github.com/venkatNagamalla/clgmajorproject)
+[https://github.com/venkatNagamalla/clgmajorproject](https://github.com/venkatNagamalla/movie-review-system)
 
 ---
 
@@ -102,5 +102,5 @@ myapp/
 
 ## Developers
 
-**Venkat Nagamalla**,
+**Nagamalla Venkat Shiva Durga**, 
 **Dasari Sriya**

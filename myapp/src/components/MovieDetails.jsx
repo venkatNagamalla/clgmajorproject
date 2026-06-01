@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LoaderView from "./LoaderView";
@@ -15,19 +14,18 @@ const apiStatusConstants = {
 };
 
 const MovieDetails = () => {
-
-    const [movieDetails, setMovieDetails] = useState({});
+  const [movieDetails, setMovieDetails] = useState({});
   const [movieApiStatus, setMovieApiStatus] = useState(
-    apiStatusConstants.initial
+    apiStatusConstants.initial,
   );
   const [castDetails, setCastDetails] = useState([]);
   const [castApiStatus, setCastApiStatus] = useState(
-    apiStatusConstants.initial
+    apiStatusConstants.initial,
   );
 
   const { id } = useParams();
 
-    const formatData = (obj) => ({
+  const formatData = (obj) => ({
     id: obj.id,
     title: obj.original_title,
     rating: obj.vote_average,
@@ -38,7 +36,6 @@ const MovieDetails = () => {
     poster: obj.poster_path,
     genres: obj.genres,
   });
-
 
   const getBannerDetails = async () => {
     setMovieApiStatus(apiStatusConstants.inProgress);
@@ -73,17 +70,16 @@ const MovieDetails = () => {
     }
   };
 
-
-   useEffect(() => {
+  useEffect(() => {
     getBannerDetails();
     getCastDetails();
     window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
 
-    const renderLoaderView = () => (
+  const renderLoaderView = () => (
     <div className="flex justify-center items-center h-[80vh]">
       <LoaderView />
     </div>
@@ -91,7 +87,9 @@ const MovieDetails = () => {
 
   const renderMovieFailureView = () => (
     <div className="flex flex-col items-center justify-center h-[50vh] gap-4">
-      <h1 className="text-xl md:text-2xl font-semibold">Something Went Wrong</h1>
+      <h1 className="text-xl md:text-2xl font-semibold">
+        Something Went Wrong
+      </h1>
       <button
         onClick={getBannerDetails}
         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
@@ -116,13 +114,13 @@ const MovieDetails = () => {
     </div>
   );
 
-    const renderMovieDetails = () => (
+  const renderMovieDetails = () => (
     <div className="">
-         <MovieBannerSection movieDetails={movieDetails} />
+      <MovieBannerSection movieDetails={movieDetails} />
     </div>
   );
 
-   const renderMovieDetailsSection = () => {
+  const renderMovieDetailsSection = () => {
     switch (movieApiStatus) {
       case apiStatusConstants.inProgress:
         return renderLoaderView();
@@ -135,29 +133,35 @@ const MovieDetails = () => {
     }
   };
 
-   const renderCastDetails = () => (
-     <div className="bg-black py-4 mt-5 px-3">
-    <h2 className="text-white text-xl text-base font-semibold mb-3 tracking-wide">
-      Cast
-      <span className="ml-2 text-xs text-gray-500 font-normal">({castDetails.length})</span>
-    </h2>
+  const renderCastDetails = () => (
+    <div className="bg-black py-4 mt-5 px-3">
+      <h2 className="text-white text-xl font-semibold mb-3 tracking-wide">
+        Cast
+        <span className="ml-2 text-xs text-gray-500 font-normal">
+          ({castDetails.length})
+        </span>
+      </h2>
 
-    <div className="relative">
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10
-                      bg-gradient-to-l to-transparent" />
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10
-                      bg-gradient-to-r to-transparent" />
+      <div className="relative">
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10
+                      bg-linear-to-l to-transparent"
+        />
+        <div
+          className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10
+                      bg-linear-to-r to-transparent"
+        />
 
-      <ul className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        {castDetails.map((eachCast) => (
-          <CastCard key={eachCast.id} castDetails={eachCast} />
-        ))}
-      </ul>
+        <ul className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+          {castDetails.map((eachCast) => (
+            <CastCard key={eachCast.id} castDetails={eachCast} />
+          ))}
+        </ul>
+      </div>
     </div>
-  </div>
-  )
+  );
 
-    const renderCastDetailsSection = () => {
+  const renderCastDetailsSection = () => {
     switch (castApiStatus) {
       case apiStatusConstants.inProgress:
         return renderLoaderView();
@@ -170,13 +174,12 @@ const MovieDetails = () => {
     }
   };
 
-     return (
-    <div className="min-h-[110vh] mt-20">
+  return (
+    <section className="mt-20">
       {renderMovieDetailsSection()}
       {renderCastDetailsSection()}
-    </div>
+    </section>
   );
+};
 
-}
-
-export default MovieDetails
+export default MovieDetails;

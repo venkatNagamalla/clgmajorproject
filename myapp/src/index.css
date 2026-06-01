@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-*{
+* {
   font-family: "Open Sans";
 }
 
-.active{
-  border-bottom:2px solid rgb(238, 255, 0);
+.active {
+  border-bottom: 2px solid rgb(238, 255, 0);
 }
 
-body{
-  color:#fff;
+body {
+  color: #fff;
 }
 
-.nav-click{
+.nav-click {
   background-color: blue;
 }

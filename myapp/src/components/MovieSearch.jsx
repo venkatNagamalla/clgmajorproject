@@ -16,7 +16,7 @@ const MovieSearch = () => {
   const [totalPages, setTotalPages] = useState();
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [moviesList, setMoviesList] = useState([]);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   const format = (obj) => ({
     id: obj.id,
@@ -25,7 +25,7 @@ const MovieSearch = () => {
     poster: obj.poster_path,
   });
 
-   const getSearchMovieDetails = async (movieName) => {
+  const getSearchMovieDetails = async (movieName) => {
     setApiStatus(apiStatusConstants.inProgress);
     const apiUrl = `https://api.themoviedb.org/3/search/movie?api\_key=${apiKey}&language=en-US&query=${movieName}&page=${page}`;
     const response = await fetch(apiUrl);
@@ -47,7 +47,7 @@ const MovieSearch = () => {
     const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`;
 
     const response = await fetch(apiUrl);
- 
+
     if (response.ok) {
       const data = await response.json();
       const updatedData = data.results.map((eachMovie) => format(eachMovie));
@@ -61,22 +61,23 @@ const MovieSearch = () => {
   };
 
   useEffect(() => {
-  if (search === "") {
+    if (search === "") {
       getMovieDetails();
     } else {
       getSearchMovieDetails(search);
     }
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-
-}, [page]);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   const renderFailureView = () => (
     <div className="flex flex-col items-center justify-center h-[50vh] gap-4">
-      <h1 className="text-xl md:text-2xl font-semibold">Something Went Wrong</h1>
+      <h1 className="text-xl md:text-2xl font-semibold">
+        Something Went Wrong
+      </h1>
       <button
         onClick={getMovieDetails}
         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
@@ -87,18 +88,24 @@ const MovieSearch = () => {
   );
 
   const renderSuccessView = () => (
-    <ul
-      className="
+    <>
+      {moviesList.length === 0 ? (
+        <h1 className="text-center text-xl mt-50">Movie not found!</h1>
+      ) : (
+        <ul
+          className="
       flex
       flex-wrap
       gap-4
       justify-center
     "
-    >
-      {moviesList.map((eachMovie) => (
-        <MovieCard key={eachMovie.id} movieDetails={eachMovie} />
-      ))}
-    </ul>
+        >
+          {moviesList.map((eachMovie) => (
+            <MovieCard key={eachMovie.id} movieDetails={eachMovie} />
+          ))}
+        </ul>
+      )}
+    </>
   );
 
   const onPageDecrement = () => {
@@ -154,7 +161,9 @@ const MovieSearch = () => {
           Prev
         </button>
 
-        <p className="text-lg font-medium">Page <span className="text-yellow-500">{page}</span></p>
+        <p className="text-lg font-medium">
+          Page <span className="text-yellow-500">{page}</span>
+        </p>
 
         <button
           onClick={onPageIncrement}
@@ -167,42 +176,51 @@ const MovieSearch = () => {
   );
 
   const searchMovie = (e) => {
-    if(search !== "" && e.key === "Enter"){
-          getSearchMovieDetails(search)
+    if (search !== "" && e.key === "Enter") {
+      getSearchMovieDetails(search);
+    } else if (search === "") {
+      getMovieDetails();
     }
-    else if(search === ""){
-      getMovieDetails()
-    }
-  }
+  };
 
   const renderSearchBar = () => {
     return (
       <div className="h-9 md:ml-9 md:w-125 mt-10 mb-10">
-        <input onKeyDown={searchMovie} onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search movie name here..." className="border border-yellow-400 outline-none px-2 h-[100%] w-[80%]" type="search"/>
-        <button onClick={() => {
-          search === ""
-            ? getMovieDetails()
-            : getSearchMovieDetails(search);
-        }} className="w-[20%] h-[100%] cursor-pointer font-semibold bg-yellow-400 text-black" type="button">Search</button>
+        <input
+          onKeyDown={searchMovie}
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          placeholder="Search movie name here..."
+          className="border border-yellow-400 outline-none px-2 h-[100%] w-[80%]"
+          type="search"
+        />
+        <button
+          onClick={() => {
+            search === "" ? getMovieDetails() : getSearchMovieDetails(search);
+          }}
+          className="w-[20%] h-full cursor-pointer font-semibold bg-yellow-400 text-black"
+          type="button"
+        >
+          Search
+        </button>
       </div>
-    )
-  }
+    );
+  };
 
   return (
-    <div className="max-w-[1400px] mt-20 mx-auto">
+    <section className="max-w-350 mt-20 mx-auto">
       {renderSearchBar()}
       {renderViews()}
 
       <hr className="border-gray-700 my-5" />
-      
+
       {moviesList.length !== 0 && (
         <>
           <hr />
-          {apiStatus === "SUCCESS" ? renderPage(): ""}
+          {apiStatus === "SUCCESS" ? renderPage() : ""}
         </>
-      ) }
-      
-    </div>
+      )}
+    </section>
   );
 };
 

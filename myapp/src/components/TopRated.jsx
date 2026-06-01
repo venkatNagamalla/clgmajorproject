@@ -46,18 +46,19 @@ const TopRated = () => {
   };
 
   useEffect(() => {
-  getMovieDetails();
+    getMovieDetails();
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-
-}, [page]);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   const renderFailureView = () => (
     <div className="flex flex-col items-center justify-center h-[50vh] gap-4">
-      <h1 className="text-xl md:text-2xl font-semibold">Something Went Wrong</h1>
+      <h1 className="text-xl md:text-2xl font-semibold">
+        Something Went Wrong
+      </h1>
       <button
         onClick={getMovieDetails}
         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
@@ -135,7 +136,9 @@ const TopRated = () => {
           Prev
         </button>
 
-        <p className="text-lg font-medium">Page <span className="text-yellow-500">{page}</span></p>
+        <p className="text-lg font-medium">
+          Page <span className="text-yellow-500">{page}</span>
+        </p>
 
         <button
           onClick={onPageIncrement}
@@ -148,15 +151,18 @@ const TopRated = () => {
   );
 
   return (
-    <div className="max-w-[1400px] mt-20 mx-auto">
-            <h2 className="mb-3 lg:mb-5 text-lg font-semibold lg:ml-13 bg-amber-300 text-black flex items-center justify-center w-65">Top Rated Movies<BiSolidMoviePlay className="ml-1"/></h2>
+    <section className="max-w-350 mt-20 mx-auto">
+      <h2 className="mb-3 lg:mb-5 text-lg font-semibold lg:ml-13 bg-amber-300 text-black flex items-center justify-center w-65">
+        Top Rated Movies
+        <BiSolidMoviePlay className="ml-1" />
+      </h2>
 
       {renderViews()}
 
       <hr className="border-gray-700 my-5" />
 
-      {apiStatus === "SUCCESS" ? renderPage(): ""}
-    </div>
+      {apiStatus === "SUCCESS" ? renderPage() : ""}
+    </section>
   );
 };
 

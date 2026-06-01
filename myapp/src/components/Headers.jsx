@@ -93,7 +93,7 @@ const Headers = () => {
         w-[70%] sm:w-[60%]
         transition-all duration-300
         flex flex-col
-        ${menu ? "right-0" : "right-[-100%]"}`}
+        ${menu ? "right-0" : "-right-full"}`}
         >
           <ul className="mt-5 text-white"> 
             <NavLink

@@ -1,10 +1,7 @@
-import React from 'react'
-
+import React from "react";
 
 const LoaderView = () => {
-  return (
-     <p>Loading...</p>
-  )
-}
+  return <p>Loading...</p>;
+};
 
-export default LoaderView
+export default LoaderView;
